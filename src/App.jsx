@@ -1,15 +1,19 @@
-import { useState } from 'react'
-import './App.css'
+import { Routes, Route, Link, useParams } from "react-router-dom";
 
-import supabase from './config/supabaseClient'
+import './App.css'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
+import Header from './components/Header'
 
 function App() {
-  console.log(supabase)
   return (
-    <div>
-      <h2>My Pet Care</h2>
-
-    </div>
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </>
   )
    
 }
