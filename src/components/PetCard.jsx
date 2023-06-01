@@ -1,3 +1,5 @@
+import "./PetCard.css"
+
 const PetCard = ({ pet }) => {
 
     const calculateAge = (dob) => {
@@ -22,6 +24,9 @@ const PetCard = ({ pet }) => {
 
     return (
         <div className="pet-card">
+            <div className="profile-picture">
+                <img src={pet.photo} alt={pet.photo} />
+            </div>
             <h3>{pet.name} {getSexIcon(pet.sex)} </h3>
             <p>{pet.breed}</p>
             <p>{age} years old</p>
