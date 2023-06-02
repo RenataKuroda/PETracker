@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
 
+import logo from "../assets/images/logo2.png"
+import './Header.css'
+
 function Header() {
   return (
     <header>
-      <h1>My Pet Care</h1>
+      <div className="logo">
+        <img src={logo} alt="Logo" />
+      </div>
       <nav>
         <ul>
           <li>

@@ -1,13 +1,53 @@
-.profile-picture {
-    width: 200px;
-    height: 200px;
-    border-radius: 70%;
-    overflow: hidden;
+.pet-card {
+    display: inline-block;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
   
-.profile-picture img {
-    width: 100%;
-    height: 100%;
+.pet-card:last-child {
+    margin-right: 0;
+}
+  
+.pet-card .profile-picture {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+  
+.pet-card .profile-picture img {
+    width: 150px;
+    height: 150px;
     object-fit: cover;
+    border-radius: 50%;
+}
+  
+.pet-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+  
+.pet-card p {
+    margin-bottom: 4px;
+}
+  
+.pet-card .buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+  
+.pet-card .buttons a,
+.pet-card .buttons i {
+    margin-left: 8px;
+    cursor: pointer;
+    color: #333;
+}
+  
+.pet-card .buttons a:hover,
+.pet-card .buttons i:hover {
+    color: #000;
 }
   
