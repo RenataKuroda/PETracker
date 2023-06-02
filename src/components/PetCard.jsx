@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./PetCard.css"
 
 const PetCard = ({ pet }) => {
@@ -31,6 +33,11 @@ const PetCard = ({ pet }) => {
             <p>{pet.breed}</p>
             <p>{age} years old</p>
             <p>Dessexed: {pet.desexed ? 'Yes' : 'No'}</p>
+            <div className="buttons">
+                <Link to={'/' + pet.id}>
+                    <i className="material-icons">edit</i>
+                </Link>
+            </div>
         </div>
     )
 }

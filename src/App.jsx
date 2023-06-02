@@ -4,6 +4,8 @@ import './App.css'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import Header from './components/Header'
+import CreatePet from './pages/CreatePet'
+import UpdatePet from "./pages/UpdatePet";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/createpet" element={<CreatePet />} />
+        <Route path="/:id" element={<UpdatePet />} />
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
