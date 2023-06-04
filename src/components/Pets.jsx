@@ -1,10 +1,11 @@
 import supabase from '../config/supabaseClient'
 import { useEffect, useState } from 'react'
-
+import { useAuth } from '../context/AuthProvider'
 import PetCard from './PetCard'
 
 const Pets = () => {
-    console.log(supabase)
+    const { user } = useAuth()
+
     const [fetchError, setFetchError] = useState(null)
     const [pets, setPets] = useState(null)
     const [orderBy, setOrderBy] = useState('name')
@@ -20,7 +21,9 @@ const Pets = () => {
             const { data, error } = await supabase
                 .from('pets')
                 .select()
+                .eq('user_id', user.id)
                 .order(orderBy, {ascending: true})
+                console.log(data)
 
                 if(error) {
                     setFetchError("could not fetch pets")

@@ -1,9 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { useAuth } from '../context/AuthProvider';
 import logo from "../assets/images/logo2.png"
 import './Header.css'
 
 function Header() {
+
+    const { user, logout } = useAuth()
+    const navigate = useNavigate()
+
+    async function handleSignOut() {
+        await logout()
+    }
+
   return (
     <header>
       <div className="logo">
@@ -19,6 +28,11 @@ function Header() {
           </li>
           
         </ul>
+        <div>
+        <p>Welcome!</p>
+        {/* conditional for user */}
+        <button onClick={handleSignOut}>Sign out</button>
+        </div>
       </nav>
     </header>
   );

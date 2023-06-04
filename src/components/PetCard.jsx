@@ -3,11 +3,9 @@ import supabase from "../config/supabaseClient";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-
 import "./PetCard.css"
 
 const PetCard = ({ pet, onDelete }) => {
-
     const calculateAge = (dob) => {
         const birthDate = new Date(dob)
         const currentDate = new Date()
@@ -29,7 +27,6 @@ const PetCard = ({ pet, onDelete }) => {
     }
 
     const formatDate = (dateString) => {
-        const options = { day: '2-digit', month: 'short' }
         const date = new Date(dateString)
         const day = date.toLocaleDateString(undefined, { day: '2-digit' });
         const month = date.toLocaleDateString(undefined, { month: 'short' });
@@ -37,18 +34,16 @@ const PetCard = ({ pet, onDelete }) => {
     }
     
     const handleDelete = async () => {
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('pets')
             .delete()
             .eq('id', pet.id)
 
         if(error){
             console.log(error)
+            return
         }
-        if(data){
-            console.log(data)
-            onDelete(pet.id)
-        }
+        onDelete(pet.id)
     }
 
     return (
