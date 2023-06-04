@@ -1,24 +1,27 @@
 import { useState } from "react"
 import { useNavigate } from "react-router"
 import supabase from "../config/supabaseClient"
+import { useAuth } from "../context/AuthProvider"
 
 const Create = () => {
     const navigate = useNavigate()
-
+    const { user } = useAuth()
+    const user_id = user.id
     const [name, setName] = useState('')
     const [breed, setBreed] = useState('')
     const [sex, setSex] = useState('')
     const [desexed, setDesexed] = useState('')
-    const [photo, setPhoto] = useState('')
+    const [photo_url, setPhoto_Url] = useState('')
     const [dob, setDOB] = useState('')
     const [formError, setFormError] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
 
         const { data, error} = await supabase
             .from('pets')
-            .insert([{ name, breed, sex, desexed, photo, dob }])
+            .insert([{ name, breed, sex, desexed, photo_url, user_id, dob }])
             .select()
 
         if (error) {
@@ -76,12 +79,12 @@ const Create = () => {
                     <option value="false">No</option>
                 </select>
 
-                <label htmlFor="photo">Photo:</label>
+                <label htmlFor="photo_url">Photo:</label>
                 <input 
                     type="img"
-                    id="photo"
-                    value={photo}
-                    onChange={(e) => setPhoto(e.target.value)}
+                    id="photo_url"
+                    value={photo_url}
+                    onChange={(e) => setPhoto_Url(e.target.value)}
                 />
 
                 <label htmlFor="dob">Date of Birth:</label>

@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     // setUser(session?.user ?? null);
     supabase.auth.getSession().then(({ data: { session } }) => {
         if (isMounted) {
+            console.log(session)
         setUser(session?.user ?? null)
         setIsLoadingUser(false)
         }
@@ -77,12 +78,13 @@ export const AuthProvider = ({ children }) => {
     setIsLoadingUser(true)
     console.log(fields)
     try {
-      const { user, error } = await supabase.auth.signInWithPassword(fields)
+      const { data, error } = await supabase.auth.signInWithPassword(fields)
       if (error) {
         throw error
       }
-      console.log("Login successful:", user)
-      setUser(user)
+      console.log("Login successful")
+      setUser(data.user)
+      console.log(data.user)
       setIsLoadingUser(false)
       navigate("/")
     } catch (error) {
