@@ -18,6 +18,7 @@ function Header() {
       <div className="logo">
         <img src={logo} alt="Logo" />
       </div>
+      {user && (
       <nav>
         <ul>
           <li>
@@ -29,11 +30,11 @@ function Header() {
           
         </ul>
         <div>
-        <p>Welcome!</p>
-        {/* conditional for user */}
+      
         <button onClick={handleSignOut}>Sign out</button>
         </div>
       </nav>
+      )}
     </header>
   );
 }
