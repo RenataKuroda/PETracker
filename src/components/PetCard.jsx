@@ -4,6 +4,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import "./PetCard.css"
+import Weight from "./PetWeight";
 
 const PetCard = ({ pet, onDelete }) => {
     const calculateAge = (dob) => {
@@ -55,6 +56,10 @@ const PetCard = ({ pet, onDelete }) => {
             <p>Breed: {pet.breed}</p>
             <p>Birthday: {formatDate(pet.dob)}</p>
             <p>Dessexed: {pet.desexed ? 'Yes' : 'No'}</p>
+            <Weight 
+            key={pet.id} 
+            pet={pet}
+            />
             <div className="buttons">
                 <Link to={'/' + pet.id}>
                     <EditIcon />
