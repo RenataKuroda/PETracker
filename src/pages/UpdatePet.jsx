@@ -12,6 +12,7 @@ const UpdatePet = () => {
     const [desexed, setDesexed] = useState('')
     const [photo, setPhoto] = useState('')
     const [dob, setDOB] = useState('')
+    const [specie, setSpecie] = useState('')
     const [formError, setFormError] = useState('')
 
     const handleSubmit = async (e) => {
@@ -19,7 +20,7 @@ const UpdatePet = () => {
 
         const { data, error } = await supabase 
             .from('pets')
-            .update({ name, breed, sex, desexed, photo, dob })
+            .update({ name, breed, sex, desexed, photo, dob, specie })
             .eq('id' , id)
             .select()
         
@@ -54,6 +55,7 @@ const UpdatePet = () => {
                 setDesexed(data.desexed)
                 setPhoto(data.photo)
                 setDOB(data.dob)
+                setSpecie(data.specie)
                 console.log(data)
             }
         }
@@ -71,6 +73,19 @@ const UpdatePet = () => {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
+
+                <label htmlFor="specie">Specie</label>
+                <select
+                    id="specie"
+                    value={specie}
+                    onChange={(e) => setSpecie(e.target.value)}
+                    required
+                >
+                    <option value="">Select:</option>
+                    <option value="cat">Cat</option>
+                    <option value="dog">Dog</option>
+                    <option value="other">Other</option>
+                </select>
 
                 <label htmlFor="breed">Breed:</label>
                 <input 

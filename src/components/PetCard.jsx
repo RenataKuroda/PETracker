@@ -49,7 +49,7 @@ const PetCard = ({ pet, onDelete }) => {
     return (
         <div className="pet-card">
             <div className="profile-picture">
-                <img src={pet.photo} alt={pet.photo} />
+                <img src={pet.photo_url} alt={pet.photo_url} />
             </div>
             <h3>{pet.name} {getSexIcon(pet.sex)} {age} years old</h3>
             <p>Breed: {pet.breed}</p>

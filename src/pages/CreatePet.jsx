@@ -3,6 +3,8 @@ import { useNavigate } from "react-router"
 import supabase from "../config/supabaseClient"
 import { useAuth } from "../context/AuthProvider"
 
+import './CreatePet.css'
+
 const Create = () => {
     const navigate = useNavigate()
     const { user } = useAuth()
@@ -13,15 +15,62 @@ const Create = () => {
     const [desexed, setDesexed] = useState('')
     const [photo_url, setPhoto_Url] = useState('')
     const [dob, setDOB] = useState('')
+    const [specie, setSpecie] = useState('')
     const [formError, setFormError] = useState('')
+
+    const [profileImage, setProfileImage] = useState("")
+    const [imagePreview, setImagePreview] = useState(null)
+    const [imageURL, setImageURL] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const upload_preset = import.meta.env.VITE_UPLOAD_PRESET
+
+    const handleImageChange = (e) => {
+        setProfileImage(e.target.files[0])
+        setImagePreview(URL.createObjectURL(e.target.files[0]))
+
+    }
+
+    const uploadImage = async (e) => {
+        e.preventDefault()
+        setIsLoading(true)
+
+        try{
+            let imageURL
+            if(profileImage) {
+                const image = new FormData()
+                image.append("file", profileImage)
+                image.append("cloud_name", "dtpduetp4")
+                image.append("upload_preset", upload_preset)
+
+                const response = await fetch(
+                    "https://api.cloudinary.com/v1_1/dtpduetp4/image/upload",
+                    {
+                        method: "post",
+                        body: image
+                    }
+                )
+                const imgData = await response.json()
+                setImageURL(imgData.url.toString())
+                setImagePreview(null)
+            }
+        } catch (error) {
+            console.log(error)
+            setIsLoading(false)
+        }
+    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         
+        if(isLoading){
+            return
+        }
 
         const { data, error} = await supabase
             .from('pets')
-            .insert([{ name, breed, sex, desexed, photo_url, user_id, dob }])
+            .insert([{ name, breed, sex, desexed, photo_url: imageURL, user_id, dob, specie }])
             .select()
 
         if (error) {
@@ -36,7 +85,34 @@ const Create = () => {
     }
 
     return(
+        
+
         <div className="create-pet">
+            <div className="uploadimage">
+                <form onSubmit={uploadImage}>
+                    <p>
+                        <label>Photo:</label>
+                        <input type="file" name="image" onChange={handleImageChange}/>
+                        
+                    </p>
+
+                    <p>
+                        {
+                        isLoading ? ("Uploading...") : (
+                            <button type="submit">
+                                Upload Image
+                            </button>
+                        )}
+                    </p>
+                </form>
+                <div className="profile-picture">
+                    {imagePreview && (
+                        <img src={imagePreview && imagePreview} alt="pet photo"/>
+                    )}
+
+                </div>
+            
+            </div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <input 
@@ -46,6 +122,19 @@ const Create = () => {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
+
+                <label htmlFor="specie">Specie</label>
+                <select
+                    id="specie"
+                    value={specie}
+                    onChange={(e) => setSpecie(e.target.value)}
+                    required
+                >
+                    <option value="">Select:</option>
+                    <option value="cat">Cat</option>
+                    <option value="dog">Dog</option>
+                    <option value="other">Other</option>
+                </select>
 
                 <label htmlFor="breed">Breed:</label>
                 <input 
@@ -79,13 +168,6 @@ const Create = () => {
                     <option value="false">No</option>
                 </select>
 
-                <label htmlFor="photo_url">Photo:</label>
-                <input 
-                    type="img"
-                    id="photo_url"
-                    value={photo_url}
-                    onChange={(e) => setPhoto_Url(e.target.value)}
-                />
 
                 <label htmlFor="dob">Date of Birth:</label>
                 <input 
