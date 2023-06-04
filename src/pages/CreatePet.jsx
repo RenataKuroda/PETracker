@@ -3,7 +3,7 @@ import { useNavigate } from "react-router"
 import supabase from "../config/supabaseClient"
 import { useAuth } from "../context/AuthProvider"
 
-import './CreatePet.css'
+import './CreateUpdatePet.css'
 
 const Create = () => {
     const navigate = useNavigate()

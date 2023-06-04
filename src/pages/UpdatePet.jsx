@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import supabase from "../config/supabaseClient"
 
+import './CreateUpdatePet.css'
+
 const UpdatePet = () => {
     const { id } = useParams()
     const navigate = useNavigate()
@@ -10,17 +12,23 @@ const UpdatePet = () => {
     const [breed, setBreed] = useState('')
     const [sex, setSex] = useState('')
     const [desexed, setDesexed] = useState('')
-    const [photo, setPhoto] = useState('')
+    const [photo_url, setPhoto_Url] = useState('')
     const [dob, setDOB] = useState('')
     const [specie, setSpecie] = useState('')
     const [formError, setFormError] = useState('')
+
+    const [profileImage, setProfileImage] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const upload_preset = import.meta.env.VITE_UPLOAD_PRESET
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         const { data, error } = await supabase 
             .from('pets')
-            .update({ name, breed, sex, desexed, photo, dob, specie })
+            .update({ name, breed, sex, desexed, photo_url, dob, specie })
             .eq('id' , id)
             .select()
         
@@ -36,6 +44,51 @@ const UpdatePet = () => {
         }
 
     }
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfileImage(file);
+            setImagePreview(URL.createObjectURL(file));
+        } else {
+            setProfileImage(null);
+            setImagePreview(photo_url);
+        }
+        // setProfileImage(e.target.files[0]);
+        // setImagePreview(URL.createObjectURL(e.target.files[0]));
+      };
+    
+      const uploadImage = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+    
+        try {
+          let imageURL;
+          if (profileImage) {
+            const image = new FormData();
+            image.append("file", profileImage);
+            image.append("cloud_name", "dtpduetp4");
+            image.append("upload_preset", upload_preset);
+    
+            const response = await fetch(
+              "https://api.cloudinary.com/v1_1/dtpduetp4/image/upload",
+              {
+                method: "post",
+                body: image,
+              }
+            );
+            const imgData = await response.json();
+            imageURL = imgData.url.toString();
+            setImagePreview(null);
+          }
+    
+          setPhoto_Url(imageURL);
+          setIsLoading(false);
+        } catch (error) {
+          console.log(error);
+          setIsLoading(false);
+        }
+      };
 
     useEffect(() => {
         const fetchPet = async () => {
@@ -53,7 +106,7 @@ const UpdatePet = () => {
                 setBreed(data.breed)
                 setSex(data.sex)
                 setDesexed(data.desexed)
-                setPhoto(data.photo)
+                setImagePreview(data.photo_url)
                 setDOB(data.dob)
                 setSpecie(data.specie)
                 console.log(data)
@@ -64,6 +117,26 @@ const UpdatePet = () => {
 
     return (
         <div className="pet-update">
+            <div className="profile-picture">
+                <form onSubmit={uploadImage}>
+                <p>
+                    <label>Photo:</label>
+                    <input type="file" accept="image/*" onChange={handleImageChange} />
+                </p>
+                {imagePreview && (
+                    <img
+                        src={imagePreview}
+                        alt="Preview"
+                        style={{ width: "150px", marginBottom: "10px" }}
+                    />
+                 )}
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <button type="submit">Upload Photo</button>
+                )}
+                </form>
+            </div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <input 
@@ -118,14 +191,6 @@ const UpdatePet = () => {
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
-
-                <label htmlFor="photo">Photo:</label>
-                <input 
-                    type="img"
-                    id="photo"
-                    value={photo}
-                    onChange={(e) => setPhoto(e.target.value)}
-                />
 
                 <label htmlFor="dob">Date of Birth:</label>
                 <input 
