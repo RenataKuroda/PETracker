@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import supabase from "../config/supabaseClient";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWeightScale } from '@fortawesome/free-solid-svg-icons';
 
 import "./PetCard.css"
 import Weight from "./PetWeight";
@@ -60,8 +62,12 @@ const PetCard = ({ pet, onDelete }) => {
             key={pet.id} 
             pet={pet}
             />
+      
             <div className="buttons">
-                <Link to={'/' + pet.id}>
+                <Link to={`/${pet.id}`}>
+                    More Info
+                </Link>
+                <Link to={'/update/' + pet.id}>
                     <EditIcon />
                 </Link>
                 <DeleteIcon onClick={handleDelete} />

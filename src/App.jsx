@@ -7,40 +7,19 @@ import { AuthProvider } from "./context/AuthProvider";
 
 import './App.css'
 import Home from './pages/Home'
-import NotFound from './pages/NotFound'
 import Header from './components/Header'
 import CreatePet from './pages/CreatePet'
 import UpdatePet from "./pages/UpdatePet";
 import SignUp from "./components/Signup";
 import Login from "./components/Login";
+import WeightHistory from "./components/WeightHistory";
 
-import supabase from "./config/supabaseClient";
 import PrivateRoutes from "./components/PrivateRoutes";
+import PetProfile from "./pages/PetProfile";
 
 const App = () => {
-  // const [session, setSession] = useState(null)
 
-  //   useEffect(() => {
-  //     supabase.auth.getSession().then(({ data: { session } }) => {
-  //       setSession(session)
-  //     })
 
-  //     const {
-  //       data: { subscription },
-  //     } = supabase.auth.onAuthStateChange((_event, session) => {
-  //       setSession(session)
-  //     })
-  //     console.log(session.user)
-  //     return () => subscription.unsubscribe()
-  //   }, [])
-
-  //   if (!session) {
-  //     return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} providers={[]}/>)
-  //   }
-  //   else {
-  //     return (<div>Logged in!</div>)
-  //   }
-  
   return (
     <>
     
@@ -52,9 +31,10 @@ const App = () => {
           <Route element={<PrivateRoutes redirectTo='/login' />}>
               <Route path="/" element={<Home />} />
               <Route path="/createpet" element={<CreatePet />} />
-              <Route path="/:id" element={<UpdatePet />} />
+              <Route path="/update/:id" element={<UpdatePet />} />
+              <Route path="/:id/weighthistory" element={<WeightHistory />} />
+              <Route path="/:id" element={<PetProfile/>} />
           </Route>
-          <Route path="/*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </>
