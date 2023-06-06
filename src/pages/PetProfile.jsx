@@ -5,6 +5,8 @@ import WeightHistory from '../components/WeightHistory'
 import { useAuth } from '../context/AuthProvider'
 import Weight from "../components/PetWeight"
 import VetVisits from "../components/VetVisits"
+import AddReminder from "../components/AddReminder"
+import Reminders from "../components/Reminders"
 
 const PetProfile = () => {
     const { id } = useParams()
@@ -13,6 +15,16 @@ const PetProfile = () => {
     const [fetchError, setFetchError] = useState(null)
     const [pet, setPet] = useState(null)
     const [refreshWeightHistory, setRefreshWeightHistory] = useState(false);
+
+    const [selectedReminder, setSelectedReminder] = useState(null);
+
+    const handleEditReminder = (reminder) => {
+        setSelectedReminder(reminder);
+    };
+
+    const handleCancelEdit = () => {
+        setSelectedReminder(null);
+    };
 
     // const calculateAge = () => {
     //     const birthDate = new Date(dob)
@@ -111,6 +123,30 @@ const PetProfile = () => {
                 <VetVisits 
                 pet={pet}
                 />
+            </div>
+            )}
+            <br />
+            {pet && (
+            <div className="reminders-container">
+            
+            <div className="add-reminder">
+                <AddReminder 
+                pet={pet}
+                />
+            </div>
+            <div>
+            {selectedReminder ? (
+              <UpdateReminder
+                reminder={selectedReminder}
+                onCancel={handleCancelEdit}
+              />
+            ) : (
+              <Reminders 
+              pet={pet}
+              onEdit={handleEditReminder} />
+            )}
+          </div>
+
             </div>
             )}
 

@@ -1,4 +1,5 @@
 import Pets from '../components/Pets'
+import Reminders from '../components/Reminders'
 import { useAuth } from '../context/AuthProvider'
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <Pets />
-            
+            <Reminders />
         </div>
     )
 }

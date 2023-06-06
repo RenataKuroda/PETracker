@@ -16,8 +16,13 @@ const AddWeight = ({ pet }) => {
     try {
       const currentDate = new Date().toISOString();
 
-      const { error } = await supabase.from('weight_history').insert([
-        { pet_id: pet.id, weight: parseFloat(weight), date: currentDate },
+      const { error } = await supabase.from('weight_history')
+      .insert([
+        { 
+          pet_id: pet.id, 
+          weight: parseFloat(weight), 
+          date: currentDate 
+        },
       ]);
 
       if (error) {
