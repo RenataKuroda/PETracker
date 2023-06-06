@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import supabase from '../config/supabaseClient';
-import Weight from './PetWeight';
+import AddWeight from './AddWeight';
 
-const WeightHistory = ({ pet }) => {
+
+const WeightHistory = ({ pet, onWeightAdded }) => {
   const [fetchError, setFetchError] = useState(null);
   const [weightData, setWeightData] = useState([]);
   const [orderBy, setOrderBy] = useState('date')
@@ -16,7 +17,7 @@ const WeightHistory = ({ pet }) => {
           .from('weight_history')
           .select('date, weight')
           .eq('pet_id', pet.id)
-          .order(orderBy, { ascending: true });
+          .order(orderBy, { ascending: false });
 
         if (error) {
           setFetchError('Could not fetch weight history');
@@ -38,9 +39,15 @@ const WeightHistory = ({ pet }) => {
     fetchWeightHistory();
   }, []);
 
+  const handleWeightAdded = async () => {
+    await onWeightAdded();
+    setOrderBy('date'); 
+  };
+
   return (
     <div>
       {fetchError && <p>Error: {fetchError}</p>}
+      <AddWeight pet={pet} onWeightAdded={handleWeightAdded}/>
       {weightData.length > 0 ? (
         <table>
           <thead>

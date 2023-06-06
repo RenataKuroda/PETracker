@@ -11,6 +11,7 @@ const PetProfile = () => {
 
     const [fetchError, setFetchError] = useState(null)
     const [pet, setPet] = useState(null)
+    const [refreshWeightHistory, setRefreshWeightHistory] = useState(false);
 
     // const calculateAge = () => {
     //     const birthDate = new Date(dob)
@@ -39,11 +40,6 @@ const PetProfile = () => {
         const month = date.toLocaleDateString(undefined, { month: 'short' });
         return `${day}-${month}`;
     }
-    // const handleDelete = (id) => {
-    //     setPets(prevPets => {
-    //         return prevPets.filter(pet => pet.id !== id)
-    //     })
-    // }
     
     useEffect(() => {
         const fetchPet = async () => {
@@ -67,6 +63,15 @@ const PetProfile = () => {
         fetchPet()
     }, [])
 
+    const handleWeightAdded = () => {
+        setRefreshWeightHistory(prevState => !prevState);
+    }
+
+    useEffect(() => {
+        if (refreshWeightHistory) {
+            setRefreshWeightHistory(false);
+        }
+    }, [refreshWeightHistory]);
     
     return (
         <div>
@@ -93,6 +98,8 @@ const PetProfile = () => {
             <div className="weight-history-container">
                 <WeightHistory 
                 pet={pet}
+                refreshWeightHistory={refreshWeightHistory}
+                onWeightAdded={handleWeightAdded}
                 />
             </div>
             )}
