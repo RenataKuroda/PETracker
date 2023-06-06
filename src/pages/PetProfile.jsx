@@ -4,6 +4,7 @@ import supabase from "../config/supabaseClient"
 import WeightHistory from '../components/WeightHistory'
 import { useAuth } from '../context/AuthProvider'
 import Weight from "../components/PetWeight"
+import VetVisits from "../components/VetVisits"
 
 const PetProfile = () => {
     const { id } = useParams()
@@ -94,6 +95,7 @@ const PetProfile = () => {
                 </div>
                 
             )}
+            <br />
             {pet && (
             <div className="weight-history-container">
                 <WeightHistory 
@@ -103,6 +105,15 @@ const PetProfile = () => {
                 />
             </div>
             )}
+            <br />
+            {pet && (
+            <div className="vet-visits-container">
+                <VetVisits 
+                pet={pet}
+                />
+            </div>
+            )}
+
         </div>
     )
 }

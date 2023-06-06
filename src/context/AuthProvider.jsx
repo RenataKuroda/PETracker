@@ -76,7 +76,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (fields) => {
     setIsLoadingUser(true)
-    console.log(fields)
     try {
       const { data, error } = await supabase.auth.signInWithPassword(fields)
       if (error) {
