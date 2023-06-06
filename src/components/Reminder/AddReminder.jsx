@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import supabase from '../config/supabaseClient';
-import { useAuth } from "../context/AuthProvider"
+import supabase from '../../config/supabaseClient';
+import { useAuth } from "../../context/AuthProvider"
 
 const AddReminder = ({ pet }) => {
     const { user } = useAuth()

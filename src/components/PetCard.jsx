@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWeightScale } from '@fortawesome/free-solid-svg-icons';
 
 import "./PetCard.css"
-import Weight from "./PetWeight";
+import Weight from "./Weight/PetWeight";
 
 const PetCard = ({ pet, onDelete }) => {
     const calculateAge = (dob) => {

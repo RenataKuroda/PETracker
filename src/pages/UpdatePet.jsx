@@ -24,26 +24,57 @@ const UpdatePet = () => {
     const upload_preset = import.meta.env.VITE_UPLOAD_PRESET
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const { data, error } = await supabase 
-            .from('pets')
-            .update({ name, breed, sex, desexed, photo_url, dob, specie })
-            .eq('id' , id)
-            .select()
-        
-        if(error){
-            console.log(error)
-            setFormError('Could not update pet')
+        e.preventDefault();
+      
+        const petData = {
+          name,
+          breed,
+          sex,
+          desexed,
+          dob,
+          specie,
+        };
+      
+        if (profileImage) {
+          try {
+            const image = new FormData();
+            image.append("file", profileImage);
+            image.append("cloud_name", "dtpduetp4");
+            image.append("upload_preset", upload_preset);
+      
+            const response = await fetch(
+              "https://api.cloudinary.com/v1_1/dtpduetp4/image/upload",
+              {
+                method: "post",
+                body: image,
+              }
+            );
+            const imgData = await response.json();
+            petData.photo_url = imgData.url.toString();
+          } catch (error) {
+            console.log(error);
+            setFormError("Could not update pet");
+            return;
+          }
         }
-
-        if(data){
-            setFormError(null)
-            console.log(data)
-            navigate('/')
+      
+        const { data, error } = await supabase
+          .from("pets")
+          .update(petData)
+          .eq("id", id)
+          .select();
+      
+        if (error) {
+          console.log(error);
+          setFormError("Could not update pet");
         }
-
-    }
+      
+        if (data) {
+          setFormError(null);
+          console.log(data);
+          navigate("/");
+        }
+      };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];

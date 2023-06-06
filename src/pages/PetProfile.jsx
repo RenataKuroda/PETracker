@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import supabase from "../config/supabaseClient"
-import WeightHistory from '../components/WeightHistory'
+import WeightHistory from '../components/Weight/WeightHistory'
 import { useAuth } from '../context/AuthProvider'
-import Weight from "../components/PetWeight"
-import VetVisits from "../components/VetVisits"
-import AddReminder from "../components/AddReminder"
-import Reminders from "../components/Reminders"
+import Weight from "../components/Weight/PetWeight"
+import VetVisits from "../components/VetVisit/VetVisits"
+import AddReminder from "../components/Reminder/AddReminder"
+import Reminders from "../components/Reminder/Reminders"
 
 const PetProfile = () => {
     const { id } = useParams()

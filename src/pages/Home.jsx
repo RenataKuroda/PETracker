@@ -1,5 +1,5 @@
 import Pets from '../components/Pets'
-import Reminders from '../components/Reminders'
+import Reminders from '../components/Reminder/Reminders'
 import { useAuth } from '../context/AuthProvider'
 
 const Home = () => {

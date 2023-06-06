@@ -1,6 +1,6 @@
-import supabase from '../config/supabaseClient'
+import supabase from '../../config/supabaseClient'
 import { useEffect, useState } from 'react'
-import { useAuth } from '../context/AuthProvider'
+import { useAuth } from '../../context/AuthProvider'
 
 const Weight = ({ pet }) => {
     const { user } = useAuth()

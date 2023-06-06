@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import supabase from '../config/supabaseClient';
+import supabase from '../../config/supabaseClient';
 import EditIcon from '@material-ui/icons/Edit';
 import UpdateReminder from './UpdateReminder';
 

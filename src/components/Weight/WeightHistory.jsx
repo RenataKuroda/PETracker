@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import supabase from '../config/supabaseClient';
+import supabase from '../../config/supabaseClient';
 import AddWeight from './AddWeight';
 
 

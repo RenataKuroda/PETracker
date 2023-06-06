@@ -12,7 +12,7 @@ import CreatePet from './pages/CreatePet'
 import UpdatePet from "./pages/UpdatePet";
 import SignUp from "./components/Signup";
 import Login from "./components/Login";
-import WeightHistory from "./components/WeightHistory";
+import WeightHistory from "./components/Weight/WeightHistory";
 
 import PrivateRoutes from "./components/PrivateRoutes";
 import PetProfile from "./pages/PetProfile";
