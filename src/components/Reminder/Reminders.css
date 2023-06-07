@@ -1,9 +1,10 @@
 .reminders-container {
     margin: 20px auto;
-    width: 60%;
+    width: 40%;
     border: 1px solid #ddd;
     padding: 10px;
     background-color: #CBCBCF;
+    border-radius: 8px;
 }
   
 .reminders-container table {

@@ -8,6 +8,8 @@ import VetVisits from "../components/VetVisit/VetVisits"
 import AddReminder from "../components/Reminder/AddReminder"
 import Reminders from "../components/Reminder/Reminders"
 
+import './PetProfile.css'
+
 const PetProfile = () => {
     const { id } = useParams()
     const { user } = useAuth()
@@ -87,7 +89,7 @@ const PetProfile = () => {
     }, [refreshWeightHistory]);
     
     return (
-        <div>
+        <div className="pet-profile">
             {fetchError && (<p>{fetchError}</p>)}
             {pet && (
                 <div className="pet-profile">

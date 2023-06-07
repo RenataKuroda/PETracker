@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../config/supabaseClient';
 import AddPetVisit from './AddVetVisit';
-// import AddWeight from './AddWeight';
+import './VetVisits.css'
 
 
 const VetVisits = ({ pet }) => {
@@ -39,6 +39,13 @@ const VetVisits = ({ pet }) => {
       fetchVetVisits();
     }, []);
 
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const day = date.toLocaleDateString(undefined, { day: '2-digit' });
+      const month = date.toLocaleDateString(undefined, { month: '2-digit' });
+      const year = date.toLocaleDateString(undefined, { year: 'numeric' });
+      return `${day}/${month}/${year}`;
+    };
 
     return (
       <div>
@@ -57,7 +64,7 @@ const VetVisits = ({ pet }) => {
             <tbody>
               {vetVisitData.map((entry) => (
                 <tr key={entry.date}>
-                  <td>{entry.date}</td>
+                  <td>{formatDate(entry.date)}</td>
                   <td>{entry.vet_name}</td>
                   <td>{entry.reason}</td>
                   <td>{entry.notes}</td>

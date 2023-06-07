@@ -16,6 +16,34 @@ const UpdatePet = () => {
     const [dob, setDOB] = useState('')
     const [specie, setSpecie] = useState('')
     const [formError, setFormError] = useState('')
+    const [breeds, setBreeds] = useState([]);
+
+    useEffect(() => {
+        const fetchBreeds = async () => {
+          let apiURL;
+          if (specie === "dog") {
+            apiURL = "https://dog.ceo/api/breeds/list/all";
+          } else if (specie === "cat") {
+            apiURL = "https://api.thecatapi.com/v1/breeds";
+          } else {
+            return;
+          }
+    
+          const response = await fetch(apiURL);
+          const data = await response.json();
+          let breeds = [];
+    
+          if (specie === "dog") {
+            breeds = Object.keys(data.message);
+          } else if (specie === "cat") {
+            breeds = data.map((breed) => breed.name);
+          }
+    
+          setBreeds(breeds);
+        };
+    
+        fetchBreeds();
+      }, [specie]);
 
     const [profileImage, setProfileImage] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
@@ -192,12 +220,18 @@ const UpdatePet = () => {
                 </select>
 
                 <label htmlFor="breed">Breed:</label>
-                <input 
-                    type="text"
+                <select
                     id="breed"
                     value={breed}
                     onChange={(e) => setBreed(e.target.value)}
-                />
+                >
+                <option value="">Select Breed</option>
+                    {breeds.map((breed) => (
+                        <option key={breed} value={breed}>
+                        {breed.charAt(0).toUpperCase() + breed.slice(1)}
+                        </option>
+                    ))}
+                </select>
 
                 <label htmlFor="sex">Sex:</label>
                 <select

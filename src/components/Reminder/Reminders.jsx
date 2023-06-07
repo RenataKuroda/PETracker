@@ -52,6 +52,14 @@ const Reminders = ({ pet }) => {
         setSelectedReminder(null);
     };
 
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      const day = date.toLocaleDateString(undefined, { day: '2-digit' });
+      const month = date.toLocaleDateString(undefined, { month: '2-digit' });
+      const year = date.toLocaleDateString(undefined, { year: 'numeric' });
+      return `${day}/${month}/${year}`;
+    };
+
     return (
         <div className='reminders-container'>
         <h3 className="reminders-title">Reminders</h3>
@@ -68,7 +76,7 @@ const Reminders = ({ pet }) => {
             <tbody>
             {reminderData.map((reminder) => (
               <tr key={reminder.id}>
-                <td>{reminder.due_date}</td>
+                <td>{formatDate(reminder.due_date)}</td>
                 <td>{reminder.task}</td>
                 <EditIcon onClick={() => handleEditReminder(reminder)} />
               </tr>

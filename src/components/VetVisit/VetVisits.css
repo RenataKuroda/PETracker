@@ -1,0 +1,25 @@
+.vet-visits-container {
+    margin-top: 20px;
+  }
+  
+  .vet-visits-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .vet-visits-container th,
+  .vet-visits-container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .vet-visits-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .vet-visits-container p {
+    margin: 10px 0;
+  }
+  

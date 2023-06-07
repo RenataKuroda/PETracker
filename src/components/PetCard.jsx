@@ -54,21 +54,24 @@ const PetCard = ({ pet, onDelete }) => {
             <div className="profile-picture">
                 <img src={pet.photo_url} alt={pet.photo_url} />
             </div>
-            <h3>{pet.name} {getSexIcon(pet.sex)} {age} years old</h3>
-            <p>Breed: {pet.breed}</p>
+            <h3>{pet.name} {getSexIcon(pet.sex)} </h3>
+            <p>{age} years old</p>
+            <p>Breed: {pet.breed.charAt(0).toUpperCase() + pet.breed.slice(1)}</p>
             <p>Birthday: {formatDate(pet.dob)}</p>
             <p>Dessexed: {pet.desexed ? 'Yes' : 'No'}</p>
             <Weight 
             key={pet.id} 
             pet={pet}
             />
+            <br />
+            <div >
+            <Link to={`/${pet.id}`} className="info-link">
+                {pet.name}'s full profile
+            </Link>
+            </div>
       
             <div className="buttons">
-                <div>
-                <Link to={`/${pet.id}`}>
-                    More Info for {pet.name}
-                </Link>
-                </div>
+               
                 <Link to={'/update/' + pet.id}>
                     <EditIcon />
                 </Link>

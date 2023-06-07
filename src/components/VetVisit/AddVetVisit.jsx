@@ -1,7 +1,9 @@
+import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 
 const AddPetVisit = ({ pet }) => {
+  const navigate = useNavigate()
   const [vetName, setVetName] = useState('');
   const [date, setDate] = useState('');
   const [reason, setReason] = useState('');
@@ -50,6 +52,7 @@ const AddPetVisit = ({ pet }) => {
     } catch (error) {
       console.log(error);
     }
+   
   };
 
   return (

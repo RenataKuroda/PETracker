@@ -7,48 +7,55 @@
     margin-right: 20px;
     margin-bottom: 20px;
     background-color: #FCF6D9;
-}
+  }
   
-.pet-card:last-child {
+  .pet-card:last-child {
     margin-right: 0;
-}
+  }
   
-.pet-card .profile-picture {
+  .pet-card .profile-picture {
     display: flex;
     justify-content: center;
     margin-bottom: 8px;
-}
+  }
   
-.pet-card .profile-picture img {
+  .pet-card .profile-picture img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
-}
+  }
   
-.pet-card h3 {
+  .pet-card h3 {
     font-size: 18px;
     margin-bottom: 8px;
-}
+  }
   
-.pet-card p {
+  .pet-card p {
     margin-bottom: 4px;
-}
+  }
   
-.pet-card .buttons {
+  .pet-card .buttons {
     display: flex;
     justify-content: flex-end;
-}
+    align-items: center;
+    margin-top: 10px;
+  }
   
-.pet-card .buttons a,
-.pet-card .buttons i {
+  .pet-card .buttons a,
+  .pet-card .buttons i {
     margin-left: 8px;
     cursor: pointer;
     color: #333;
-}
+  }
   
-.pet-card .buttons a:hover,
-.pet-card .buttons i:hover {
+  .pet-card .buttons a:hover,
+  .pet-card .buttons i:hover {
     color: #000;
-}
-  
+  }
+
+  .pet-card .info-link {
+    text-decoration:underline; 
+    color: inherit; 
+    
+  }
