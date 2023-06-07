@@ -13,26 +13,20 @@ function Header() {
         await logout()
     }
 
+    function handleLogoClick() {
+      navigate('/');
+    }
+
   return (
     <header>
-      <div className="logo">
+      <div className="logo" onClick={handleLogoClick}>
         <img src={logo} alt="Logo" />
       </div>
       {user && (
       <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/createpet">Add Pet</Link>
-          </li>
-          
-        </ul>
-        <div>
-      
-        <button onClick={handleSignOut}>Sign out</button>
-        </div>
+        
+      <button onClick={handleSignOut}>Sign out</button>
+
       </nav>
       )}
     </header>

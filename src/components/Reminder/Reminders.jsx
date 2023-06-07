@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import supabase from '../../config/supabaseClient';
 import EditIcon from '@material-ui/icons/Edit';
 import UpdateReminder from './UpdateReminder';
+import './Reminders.css'
 
 const Reminders = ({ pet }) => {
   const [fetchError, setFetchError] = useState(null);
@@ -53,13 +54,14 @@ const Reminders = ({ pet }) => {
 
     return (
         <div className='reminders-container'>
+        <h3 className="reminders-title">Reminders</h3>
         {fetchError && <p>Error: {fetchError}</p>}
         {reminderData.length > 0 ? (
+            
             <table>
             <thead>
                 <tr>
                 <th>Due Date</th>
-                <th>Pet</th>
                 <th>Task</th>
                 </tr>
             </thead>
@@ -68,9 +70,7 @@ const Reminders = ({ pet }) => {
               <tr key={reminder.id}>
                 <td>{reminder.due_date}</td>
                 <td>{reminder.task}</td>
-                <td>
-                  <EditIcon onClick={() => handleEditReminder(reminder)} />
-                </td>
+                <EditIcon onClick={() => handleEditReminder(reminder)} />
               </tr>
             ))}
           </tbody>
