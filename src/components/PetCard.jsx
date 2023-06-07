@@ -64,9 +64,11 @@ const PetCard = ({ pet, onDelete }) => {
             />
       
             <div className="buttons">
+                <div>
                 <Link to={`/${pet.id}`}>
-                    More Info
+                    More Info for {pet.name}
                 </Link>
+                </div>
                 <Link to={'/update/' + pet.id}>
                     <EditIcon />
                 </Link>
