@@ -56,9 +56,9 @@ const PetCard = ({ pet, onDelete }) => {
             </div>
             <h3>{pet.name} {getSexIcon(pet.sex)} </h3>
             <p>{age} years old</p>
-            <p>Breed: {pet.breed.charAt(0).toUpperCase() + pet.breed.slice(1)}</p>
-            <p>Birthday: {formatDate(pet.dob)}</p>
-            <p>Dessexed: {pet.desexed ? 'Yes' : 'No'}</p>
+            <p><strong>Breed:</strong> {pet.breed.charAt(0).toUpperCase() + pet.breed.slice(1)}</p>
+            <p><strong>Birthday:</strong> {formatDate(pet.dob)}</p>
+            <p><strong>Dessexed:</strong> {pet.desexed ? 'Yes' : 'No'}</p>
             <Weight 
             key={pet.id} 
             pet={pet}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 import { useAuth } from "../../context/AuthProvider"
 
-const AddReminder = ({ pet }) => {
+const AddReminder = ({ pet, fetchReminders }) => {
     const { user } = useAuth()
     const user_id = user.id
     const [dueDate, setDueDate] = useState('');
@@ -38,6 +38,9 @@ const AddReminder = ({ pet }) => {
         if (error) {
             console.log(error);
             return;
+        }
+        else {
+            fetchReminders()
         }
 
         // Clear the input fields after successful reminder addition

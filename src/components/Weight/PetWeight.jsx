@@ -38,7 +38,7 @@ const Weight = ({ pet }) => {
     return (
         <div className="pet-weight">
         {weight && (
-            <p>Weight: {weight} kg</p>
+            <p><strong>Weight:</strong> {weight} kg</p>
         )}
         </div>
     )

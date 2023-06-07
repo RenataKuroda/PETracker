@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 
-const UpdateReminder = ({ reminder }) => {
+const UpdateReminder = ({ reminder, fetchReminders }) => {
   const [dueDate, setDueDate] = useState(reminder.due_date);
   const [task, setTask] = useState(reminder.task);
   const [completed, setCompleted] = useState(reminder.completed);
@@ -34,6 +34,7 @@ const UpdateReminder = ({ reminder }) => {
         console.log(error);
       } else {
         setUpdateError(null);
+        fetchReminders()
       }
 
       setIsUpdating(false);

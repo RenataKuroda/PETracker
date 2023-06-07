@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 
-const AddWeight = ({ pet }) => {
+const AddWeight = ({ pet, fetchWeightHistory }) => {
   const [weight, setWeight] = useState('');
 
   const handleWeightChange = (e) => {
@@ -28,6 +28,9 @@ const AddWeight = ({ pet }) => {
       if (error) {
         console.log(error);
         return;
+      }
+      else {
+        fetchWeightHistory()
       }
 
       setWeight('');

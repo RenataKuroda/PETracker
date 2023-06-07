@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../config/supabaseClient';
-import AddPetVisit from './AddVetVisit';
+import AddVetVisit from './AddVetVisit';
 import './VetVisits.css'
 
 
@@ -9,32 +9,31 @@ const VetVisits = ({ pet }) => {
     const [vetVisitData, setVetVisitData] = useState([]);
     const [orderBy, setOrderBy] = useState('date')
 
-    
-    useEffect(() => {
-      const fetchVetVisits = async () => {
-        try {
-          const { data, error } = await supabase
-            .from('vet_visits')
-            .select('date, vet_name, reason, notes')
-            .eq('pet_id', pet.id)
-            .order(orderBy, { ascending: false });
+    const fetchVetVisits = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('vet_visits')
+          .select('date, vet_name, reason, notes')
+          .eq('pet_id', pet.id)
+          .order(orderBy, { ascending: false });
 
-          if (error) {
-            setFetchError('Could not fetch vet visit history');
-            console.log(error);
-            setVetVisitData([]);
-          }
-          if (data) {
-            setVetVisitData(data);
-            setFetchError(null);
-            console.log(data)
-          }
-        } catch (error) {
+        if (error) {
           setFetchError('Could not fetch vet visit history');
           console.log(error);
           setVetVisitData([]);
         }
-      };
+        if (data) {
+          setVetVisitData(data);
+          setFetchError(null);
+          console.log(data)
+        }
+      } catch (error) {
+        setFetchError('Could not fetch vet visit history');
+        console.log(error);
+        setVetVisitData([]);
+      }
+    };
+    useEffect(() => {
 
       fetchVetVisits();
     }, []);
@@ -50,7 +49,7 @@ const VetVisits = ({ pet }) => {
     return (
       <div>
         {fetchError && <p>Error: {fetchError}</p>}
-        <AddPetVisit pet={pet} />
+        <AddVetVisit pet={pet} fetchVetVisits={fetchVetVisits}/>
         {vetVisitData.length > 0 ? (
           <table>
             <thead>
