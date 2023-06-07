@@ -1,6 +1,7 @@
 .profile-picture {
     display: flex;
     margin-bottom: 8px;
+    
 }
   
 .profile-picture img {
@@ -8,9 +9,10 @@
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+   
 }
 
-.pet-update {
+.create-pet {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +21,7 @@
     
   }
   
-  .pet-update form {
+  .create-pet form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,28 +29,28 @@
     margin-top: 20px;
   }
   
-  .pet-update label {
+  .create-pet label {
     font-weight: bold;
   }
-  .pet-update input[type="text"] {
+  .create-pet input[type="text"] {
     width: 185px;
     height: 15px;
     padding: 5px;
   }
 
-  .pet-update select {
+  .create-pet select {
     width: 200px;
     height: 30px;
     padding: 5px;
   }
 
-  .pet-update input[type="date"] {
+  .create-pet input[type="date"] {
     width: 190px;
     height: 30px;
     padding: 5px;
   }
   
-  .pet-update button {
+  .create-pet button {
     padding: 10px 20px;
     background-color: #FCDC49;
     color: black;
@@ -57,11 +59,9 @@
     border-radius: 4px;
   }
   
-  .pet-update button:hover {
+  .create-pet button:hover {
     background-color: darkgray;
     color: white;
   }
 
-  .pet-update h6 {
-    color: darkgray;
-  }
+  

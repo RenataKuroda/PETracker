@@ -4,7 +4,7 @@ import supabase from "../config/supabaseClient"
 import { useAuth } from "../context/AuthProvider"
 
 
-import './CreateUpdatePet.css'
+import './CreatePet.css'
 
 const Create = () => {
     const navigate = useNavigate()
@@ -119,8 +119,14 @@ const Create = () => {
         <div className="create-pet">
             <div className="uploadimage">
                 <form onSubmit={uploadImage}>
+                <div className="profile-picture">
+                    {imagePreview && (
+                        <img src={imagePreview && imagePreview} alt="pet photo"/>
+                    )}
+
+                </div>
                     <p>
-                        <label>Photo:</label>
+                        <br />
                         <input type="file" name="image" onChange={handleImageChange}/>
                         
                     </p>
@@ -134,12 +140,7 @@ const Create = () => {
                         )}
                     </p>
                 </form>
-                <div className="profile-picture">
-                    {imagePreview && (
-                        <img src={imagePreview && imagePreview} alt="pet photo"/>
-                    )}
-
-                </div>
+                
             
             </div>
             <form onSubmit={handleSubmit}>
@@ -215,7 +216,9 @@ const Create = () => {
                 <button>Add Pet</button>
 
                 {formError && <p className="error">{formError}</p>}
+                <button onClick={() => navigate('/')}>Cancel</button>
             </form>
+    
         </div>
     )
 }

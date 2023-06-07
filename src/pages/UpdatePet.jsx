@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import supabase from "../config/supabaseClient"
 
-import './CreateUpdatePet.css'
+import './UpdatePet.css'
 
 const UpdatePet = () => {
     const { id } = useParams()
@@ -179,14 +179,14 @@ const UpdatePet = () => {
             <div className="profile-picture">
                 <form onSubmit={uploadImage}>
                 <p>
-                    <label>Photo:</label>
                     <input type="file" accept="image/*" onChange={handleImageChange} />
+                    <h6>If you wanna change the photo, select another file</h6>
                 </p>
                 {imagePreview && (
                     <img
                         src={imagePreview}
                         alt="Preview"
-                        style={{ width: "150px", marginBottom: "10px" }}
+                        
                     />
                  )}
                 {isLoading ? (
@@ -268,6 +268,7 @@ const UpdatePet = () => {
                 <button>Update Pet</button>
 
                 {formError && <p className="error">{formError}</p>}
+                <button onClick={() => navigate('/')}>Cancel</button>
             </form>
         </div>
     )
