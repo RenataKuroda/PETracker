@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthProvider'
 
+import './Signup.css'
+
 const SignUp = () => {
   const { register } = useAuth()
   const emailRef = useRef()
@@ -18,8 +20,8 @@ const SignUp = () => {
   
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="signup-container">
+      <form onSubmit={handleSubmit} className="signup-form">
         <label htmlFor="input-email">Email</label>
         <input id="input-email" type="email" ref={emailRef} />
 
@@ -31,10 +33,10 @@ const SignUp = () => {
         <button type="submit">Sign up</button>
       </form>
 
-      <p>
+      <p className="message">
         Already have an account? <Link to="/login">Log In</Link>
       </p>
-    </>
+    </div>
   )
 }
 
