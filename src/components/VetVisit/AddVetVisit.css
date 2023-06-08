@@ -1,0 +1,55 @@
+.add-visit-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px; 
+}
+
+.add-visit-container h2 {
+  margin-bottom: 10px;
+}
+
+.add-visit-container form {
+  display: grid; 
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.add-visit-container label {
+  font-weight: bold;
+  text-align: left;
+}
+
+.add-visit-container input[type="date"],
+.add-visit-container input[type="text"],
+.add-visit-container textarea {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #F5F5F5;
+  border: 1px solid lightgray;
+}
+
+.add-visit-container textarea {
+  height: 100px;
+}
+
+.add-visit-container button {
+  padding: 10px 20px;
+  background-color: #FCDC49;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-visit-container button:hover {
+  background-color: darkgray;
+  color: white;
+}
+
+  
+  

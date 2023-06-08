@@ -1,0 +1,34 @@
+.add-reminder-container {
+    margin-top: 20px;
+  }
+  
+  .add-reminder-container input[type="date"]{
+    margin-right: 10px;
+    width: 110px;
+    padding: 5px;
+    background-color: #F5F5F5;
+    border: 1px solid lightgray;
+  }
+
+  .add-reminder-container input[type="text"] {
+    margin-right: 10px;
+    width: 200px;
+    padding: 5px;
+    background-color: #F5F5F5;
+    border: 1px solid lightgray;
+  }
+  
+  .add-reminder-container button {
+    margin-top: 10px;
+    background-color: #FCDC49;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 7px 20px;
+  }
+  
+  .add-reminder-container button:hover {
+    background-color: darkgray;
+    color: white;
+  }

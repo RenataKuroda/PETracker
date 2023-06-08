@@ -7,6 +7,27 @@
   border: 1px solid #FCF6D9;
 }
 
+.content-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 24px;
+  gap: 70px;
+}
+
+.content-section {
+  border: 1px solid #FCF6D9;
+  padding: 16px;
+  
+}
+.info-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  gap: 60px; 
+  border: 2px solid #FCDC49;
+  border-radius: 10px;
+  padding: 20px;
+}
+
 .profile-picture {
   display: flex;
   flex-direction: column;
@@ -28,20 +49,43 @@
   border: 1px solid #FCF6D9;
 }
 
+.profile-info {
+  flex: 1;
+}
+
 .pet-profile h3 {
   margin-bottom: 8px;
 }
 
 .pet-profile p {
   margin-bottom: 4px;
-}
+} 
 
-.weight-history-container,
-.vet-visits-container,
-.reminders-container {
-  margin-top: 24px;
+.weight-section {
   border: 1px solid #FCF6D9;
   padding: 16px;
 }
 
-  
+.content-section:not(:first-child) {
+  margin-top: 24px;
+}
+
+.content-section button {
+  padding: 7px 15px;
+  background-color: #FCDC49;
+  color: black;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.content-section button:hover {
+  background-color: darkgray;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    grid-template-columns: 1fr;
+  }
+}

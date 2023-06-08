@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 
+import './AddWeight.css'
+
 const AddWeight = ({ pet, fetchWeightHistory }) => {
   const [weight, setWeight] = useState('');
 
@@ -40,7 +42,7 @@ const AddWeight = ({ pet, fetchWeightHistory }) => {
   };
 
   return (
-    <div>
+    <div className='add-weight-container'>
       <input
         type="number"
         value={weight}

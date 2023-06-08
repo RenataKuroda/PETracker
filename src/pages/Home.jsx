@@ -9,15 +9,17 @@ import './Home.css'
 const Home = () => {
     const { user, logout } = useAuth()
     return (
-        <div className="home-container">
-        <div className="button-container">
-            <Link to="/createpet" className="button-link">Add Pet</Link>
+        <div>
+            <div className="button-container">
+                <Link to="/createpet" className="button-link">Add Pet</Link>
+            </div>
+            <div className="home-container">
+                <div className="pets-container">
+                    <Pets />
+                </div>
+                <Reminders className="reminders-container"/>
+            </div>
         </div>
-        <div className="pets-container">
-            <Pets />
-        </div>
-        <Reminders />
-    </div>
     )
 }
 

@@ -74,6 +74,7 @@ const Reminders = ({ pet }) => {
                 <tr>
                 <th>Due Date</th>
                 <th>Task</th>
+                <th></th>
                 </tr>
             </thead>
             <tbody>

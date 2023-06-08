@@ -1,0 +1,45 @@
+.weight-history-container {
+    margin-top: 20px;
+    
+  }
+
+  .weight-history-title {
+    margin-bottom: 10px;
+  }
+  
+  .weight-history-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .weight-history-container th,
+  .weight-history-container td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .weight-history-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .weight-history-container p {
+    margin: 10px 0;
+  }
+  
+  .weight-history-container button {
+    padding: 7px 15px;
+    background-color: #FCDC49;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .weight-history-container button:hover {
+    background-color: darkgray;
+    color: white;
+  }

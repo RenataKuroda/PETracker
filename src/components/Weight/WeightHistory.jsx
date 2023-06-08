@@ -3,11 +3,14 @@ import { Line } from 'react-chartjs-2';
 import supabase from '../../config/supabaseClient';
 import AddWeight from './AddWeight';
 
+import './WeightHistory.css'
+
 
 const WeightHistory = ({ pet, onWeightAdded }) => {
   const [fetchError, setFetchError] = useState(null);
   const [weightData, setWeightData] = useState([]);
   const [orderBy, setOrderBy] = useState('date')
+  const [showAddWeightForm, setShowAddWeightForm] = useState(false);
 
   const fetchWeightHistory = async () => {
     try {
@@ -44,6 +47,10 @@ const WeightHistory = ({ pet, onWeightAdded }) => {
     setOrderBy('date'); 
   };
 
+  const toggleAddWeightForm = () => {
+    setShowAddWeightForm(!showAddWeightForm);
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.toLocaleDateString(undefined, { day: '2-digit' });
@@ -53,9 +60,14 @@ const WeightHistory = ({ pet, onWeightAdded }) => {
   };
 
   return (
-    <div>
+        <div className='weight-history-container'>
+      
+      <button className="add-weight-toggle" onClick={toggleAddWeightForm}>
+        {showAddWeightForm ? 'Hide Form' : 'Add Weight'}
+      </button>
+      <h3 className="weight-history-title">Weight History</h3>
+      {showAddWeightForm && <AddWeight pet={pet} onWeightAdded={handleWeightAdded} />}
       {fetchError && <p>Error: {fetchError}</p>}
-      <AddWeight pet={pet} fetchWeightHistory={fetchWeightHistory}/>
       {weightData.length > 0 ? (
         <table>
           <thead>
@@ -65,8 +77,8 @@ const WeightHistory = ({ pet, onWeightAdded }) => {
             </tr>
           </thead>
           <tbody>
-            {weightData.map((entry) => (
-              <tr key={entry.date}>
+            {weightData.map((entry, index) => (
+              <tr key={`${entry.date}-${index}`}>
                 <td>{formatDate(entry.date)}</td>
                 <td>{entry.weight} kg</td>
               </tr>

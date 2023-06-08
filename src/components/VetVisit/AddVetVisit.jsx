@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
 
+import './AddVetVisit.css'
+
 const AddPetVisit = ({ pet, fetchVetVisits }) => {
   const navigate = useNavigate()
   const [vetName, setVetName] = useState('');
@@ -46,7 +48,7 @@ const AddPetVisit = ({ pet, fetchVetVisits }) => {
       else {
         fetchVetVisits()
       }
-      // Clear form fields after successful submission
+  
       setVetName('');
       setDate('');
       setReason('');
@@ -58,8 +60,8 @@ const AddPetVisit = ({ pet, fetchVetVisits }) => {
   };
 
   return (
-    <div>
-      <h2>Add Vet Visit</h2>
+    <div className="add-visit-container">
+     
       <form onSubmit={handleSubmit}>
         <div>
           <label>Vet Name:</label>

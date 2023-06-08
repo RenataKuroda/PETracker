@@ -113,8 +113,7 @@ const UpdatePet = () => {
             setProfileImage(null);
             setImagePreview(photo_url);
         }
-        // setProfileImage(e.target.files[0]);
-        // setImagePreview(URL.createObjectURL(e.target.files[0]));
+
       };
     
       const uploadImage = async (e) => {

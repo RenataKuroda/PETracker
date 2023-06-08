@@ -17,6 +17,7 @@ const PetProfile = () => {
     const [fetchError, setFetchError] = useState(null)
     const [pet, setPet] = useState(null)
     const [refreshWeightHistory, setRefreshWeightHistory] = useState(false);
+    const [showAddReminderForm, setShowAddReminderForm] = useState(false);
 
     const [selectedReminder, setSelectedReminder] = useState(null);
 
@@ -28,26 +29,6 @@ const PetProfile = () => {
         setSelectedReminder(null);
     };
 
-    // const calculateAge = () => {
-    //     const birthDate = new Date(dob)
-    //     const currentDate = new Date()
-    //     const ageInMilliseconds = currentDate - birthDate
-    //     const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365))
-    //     return ageInYears
-    // };
-    
-    // const age = calculateAge(pet.dob)
-    // console.log(pet.dob)
-
-    // const getSexIcon = (pet) => {
-    //     if (sex === 'male') {
-    //       return '♂︎'
-    //     }
-    //     if (sex === 'female') {
-    //       return '♀︎'
-    //     }
-    //     return null
-    // }
 
     const formatDate = (dateString) => {
         const date = new Date(dateString)
@@ -55,6 +36,14 @@ const PetProfile = () => {
         const month = date.toLocaleDateString(undefined, { month: 'short' });
         return `${day}-${month}`;
     }
+
+    const calculateAge = () => {
+        const birthDate = new Date(pet.dob);
+        const currentDate = new Date();
+        const ageInMilliseconds = currentDate - birthDate;
+        const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365));
+        return ageInYears;
+      };
     
     useEffect(() => {
         const fetchPet = async () => {
@@ -78,6 +67,7 @@ const PetProfile = () => {
         fetchPet()
     }, [])
 
+    
     const handleWeightAdded = () => {
         setRefreshWeightHistory(prevState => !prevState);
     }
@@ -88,72 +78,61 @@ const PetProfile = () => {
         }
     }, [refreshWeightHistory]);
     
+    const toggleAddReminderForm = () => {
+        setShowAddReminderForm(!showAddReminderForm);
+      };
+
     return (
-        <div className="pet-profile">
-            {fetchError && (<p>{fetchError}</p>)}
-            {pet && (
-                <div className="pet-profile">
-                <div className="profile-picture">
-                    <p>{pet.name}</p>
-                   
-                    <img src={pet.photo_url} alt={pet.photo_url} />
-                </div>
-                <h3>{pet.sex} {pet.dob} </h3>
-                <p>Breed: {pet.breed}</p>
-                <p>Birthday: {formatDate(pet.dob)}</p>
-                <p>Dessexed: {pet.desexed ? 'Yes' : 'No'}</p>
-                <Weight 
-                key={pet.id} 
-                pet={pet}
+     <div className="pet-profile">
+      {fetchError && <p>{fetchError}</p>}
+      {pet && (
+        <div className="content-container">
+          <div className="content-section">
+            <div className="info-section">
+              <div className="profile-picture">
+                <h3>{pet.name}</h3>
+                <img src={pet.photo_url} alt={pet.photo_url} />
+              </div>
+              <div className="profile-info">
+                <p>{pet.name} is a {pet.sex === 'male' ? 'boy' : 'girl'}</p>
+                <p>And is {calculateAge()} years old</p>
+                <p><strong>Birthday:</strong> {formatDate(pet.dob)}</p>
+                <p><strong>Breed:</strong> {pet.breed}</p>
+                <Weight
+                  key={pet.id}
+                  pet={pet}
                 />
-                </div>
-                
-            )}
-            <br />
-            {pet && (
-            <div className="weight-history-container">
-                <WeightHistory 
-                pet={pet}
-                refreshWeightHistory={refreshWeightHistory}
-                onWeightAdded={handleWeightAdded}
-                />
+                <p>Is {pet.name} desexed?   {pet.desexed ? 'Yes' : 'No'}</p>
+              </div>
             </div>
-            )}
-            <br />
-            {pet && (
-            <div className="vet-visits-container">
-                <VetVisits 
-                pet={pet}
-                />
-            </div>
-            )}
-            <br />
-            {pet && (
-            <div className="reminders-container">
-            
-            <div className="add-reminder">
-                <AddReminder 
-                pet={pet}
-                />
-            </div>
-            <div>
-            {selectedReminder ? (
-              <UpdateReminder
-                reminder={selectedReminder}
-                onCancel={handleCancelEdit}
-              />
-            ) : (
-              <Reminders 
-              pet={pet}
-              onEdit={handleEditReminder} />
-            )}
           </div>
-
-            </div>
-            )}
-
+          <div>
+            <WeightHistory
+              pet={pet}
+              refreshWeightHistory={refreshWeightHistory}
+              onWeightAdded={handleWeightAdded}
+            />
+          </div>
         </div>
-    )
+      )}
+      {pet && (
+        <div className="content-container">
+          <div className="content-section">
+            <VetVisits
+              pet={pet}
+            />
+          </div>
+          <div className="content-section">
+            <button className="add-reminder-toggle" onClick={toggleAddReminderForm}>
+              {showAddReminderForm ? 'Hide Form' : 'Add Reminder'}
+            </button>
+            {showAddReminderForm && <AddReminder pet={pet} />}
+            <Reminders pet={pet} />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default PetProfile

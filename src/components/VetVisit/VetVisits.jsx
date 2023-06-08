@@ -8,6 +8,7 @@ const VetVisits = ({ pet }) => {
     const [fetchError, setFetchError] = useState(null);
     const [vetVisitData, setVetVisitData] = useState([]);
     const [orderBy, setOrderBy] = useState('date')
+    const [showAddForm, setShowAddForm] = useState(false);
 
     const fetchVetVisits = async () => {
       try {
@@ -47,35 +48,40 @@ const VetVisits = ({ pet }) => {
     };
 
     return (
-      <div>
-        {fetchError && <p>Error: {fetchError}</p>}
-        <AddVetVisit pet={pet} fetchVetVisits={fetchVetVisits}/>
-        {vetVisitData.length > 0 ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Vet</th>
-                <th>Reason</th>
-                <th>Notes</th>
+      <div className='vet-visit-container'>
+      
+      <button onClick={() => setShowAddForm(!showAddForm)}>
+        {showAddForm ? "Hide Form" : "Add Vet Visit"} 
+      </button>
+      <h3 className="vet-visit-title">Vet Visit History</h3>
+      {showAddForm && <AddVetVisit pet={pet} fetchVetVisits={fetchVetVisits} />} 
+      {fetchError && <p>Error: {fetchError}</p>}
+      {vetVisitData.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Vet</th>
+              <th>Reason</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vetVisitData.map((entry) => (
+              <tr key={entry.date}>
+                <td>{formatDate(entry.date)}</td>
+                <td>{entry.vet_name}</td>
+                <td>{entry.reason}</td>
+                <td>{entry.notes}</td>
               </tr>
-            </thead>
-            <tbody>
-              {vetVisitData.map((entry) => (
-                <tr key={entry.date}>
-                  <td>{formatDate(entry.date)}</td>
-                  <td>{entry.vet_name}</td>
-                  <td>{entry.reason}</td>
-                  <td>{entry.notes}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No vet visit data available</p>
-        )}
-      </div>
-    );
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>No vet visit data available</p>
+      )}
+    </div>
+  );
 };
 
 export default VetVisits;

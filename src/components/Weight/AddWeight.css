@@ -1,0 +1,24 @@
+.add-weight-container {
+    margin-top: 20px;
+  }
+  
+  .add-weight-container input[type="number"] {
+    padding: 5px;
+    background-color: #F5F5F5;
+    border: 1px solid lightgray;
+  }
+  
+  .add-weight-container button {
+    padding: 7px 15px;
+    background-color: #FCDC49;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .add-weight-container button:hover {
+    background-color: darkgray;
+    color: white;
+  }
+  
