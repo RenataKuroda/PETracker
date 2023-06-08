@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../config/supabaseClient';
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import UpdateReminder from './UpdateReminder';
 import './Reminders.css'
 
@@ -20,7 +20,7 @@ const Reminders = ({ pet }) => {
         .limit(6);
 
       if (pet) {
-          query = query.eq('pet_id', pet.id);
+        query = query.eq('pet_id', pet.id);
       }
 
       const { data, error } = await query;
@@ -43,47 +43,47 @@ const Reminders = ({ pet }) => {
 
 
   useEffect(() => {
-    
+
     fetchReminders();
   }, []);
 
-    const handleEditReminder = (reminder) => {
-        setSelectedReminder(reminder);
-    };
+  const handleEditReminder = (reminder) => {
+    setSelectedReminder(reminder);
+  };
 
-    const handleCancelEdit = () => {
-        setSelectedReminder(null);
-    };
+  const handleCancelEdit = () => {
+    setSelectedReminder(null);
+  };
 
-    const formatDate = (dateString) => {
-      const date = new Date(dateString);
-      const day = date.toLocaleDateString(undefined, { day: '2-digit' });
-      const month = date.toLocaleDateString(undefined, { month: '2-digit' });
-      const year = date.toLocaleDateString(undefined, { year: 'numeric' });
-      return `${day}/${month}/${year}`;
-    };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.toLocaleDateString(undefined, { day: '2-digit' });
+    const month = date.toLocaleDateString(undefined, { month: '2-digit' });
+    const year = date.toLocaleDateString(undefined, { year: 'numeric' });
+    return `${day}/${month}/${year}`;
+  };
 
-    return (
-        <div className='reminders-container'>
-        <h3 className="reminders-title">Reminders</h3>
-        {fetchError && <p>Error: {fetchError}</p>}
-        {reminderData.length > 0 ? (
-            
-            <table>
-            <thead>
-                <tr>
-                <th>Due Date</th>
-                <th>Task</th>
-                <th></th>
-                </tr>
-            </thead>
-            <tbody>
+  return (
+    <div className='reminders-container'>
+      <h3 className="reminders-title">Reminders</h3>
+      {fetchError && <p>Error: {fetchError}</p>}
+      {reminderData.length > 0 ? (
+
+        <table>
+          <thead>
+            <tr>
+              <th>Due Date</th>
+              <th>Task</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
             {reminderData.map((reminder) => (
               <tr key={reminder.id}>
                 <td>{formatDate(reminder.due_date)}</td>
                 <td>{reminder.task}</td>
                 <td>
-                <EditIcon onClick={() => handleEditReminder(reminder)} />
+                  <EditIcon onClick={() => handleEditReminder(reminder)} />
                 </td>
               </tr>
             ))}
@@ -100,7 +100,7 @@ const Reminders = ({ pet }) => {
         />
       )}
     </div>
-    );
+  );
 };
 
 export default Reminders;
