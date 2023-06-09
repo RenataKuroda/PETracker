@@ -5,8 +5,6 @@ import { useAuth } from "../../context/AuthProvider"
 import './AddReminder.css'
 
 export const AddReminder = ({ pet_id, user_id, fetchReminders, addReminder }) => {
-    // const { user } = useAuth()
-    // const user_id = user.id
     const [dueDate, setDueDate] = useState('');
     const [task, setTask] = useState('');
 
@@ -14,31 +12,12 @@ export const AddReminder = ({ pet_id, user_id, fetchReminders, addReminder }) =>
         setDueDate(e.target.value);
     };
 
-    // const handlePetIdChange = (e) => {
-    //     setPetId(e.target.value);
-    // };
-
     const handleTaskChange = (e) => {
         setTask(e.target.value);
     };
 
     const handleAddReminder = async () => {
         if (!dueDate || !task) {
-        // return;
-        // }
-
-        // try {
-        // const { data, error } = await supabase.from('reminders').insert([
-        //     {
-        //     due_date: dueDate,
-        //     pet_id: pet.id,
-        //     task: task,
-        //     user_id: user.id,
-        //     },
-        // ]);
-
-        // if (error) {
-        //     console.log(error);
             return;
         }
         try {
@@ -51,12 +30,6 @@ export const AddReminder = ({ pet_id, user_id, fetchReminders, addReminder }) =>
             fetchReminders && fetchReminders()
             setDueDate('');
             setTask('');
-        // else {
-        //     fetchReminders()
-        // }
-
-        // setDueDate('');
-        // setTask('');
         } catch (error) {
             console.log(error);
         }
@@ -90,7 +63,6 @@ const ConnectedAddReminder = ({ pet, fetchReminders }) => {
         if (error) {
             throw new Error(error.message);
         }
-
     };
 
     return <AddReminder pet_id={pet.id} user_id={user.id} fetchReminders={fetchReminders} addReminder={addReminder} />

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import supabase from '../../config/supabaseClient';
+import { useAuth } from '../../context/AuthProvider';
 
 import './AddWeight.css'
 
-const AddWeight = ({ pet, fetchWeightHistory }) => {
+export const AddWeight = ({ pet_id, fetchWeightHistory, addWeight }) => {
   const [weight, setWeight] = useState('');
 
   const handleWeightChange = (e) => {
@@ -14,28 +15,19 @@ const AddWeight = ({ pet, fetchWeightHistory }) => {
     if (!weight || parseFloat(weight) <= 0) {
       return;
     }
-
     try {
       const currentDate = new Date().toISOString();
 
-      const { error } = await supabase.from('weight_history')
-      .insert([
-        { 
-          pet_id: pet.id, 
+      await addWeight({ 
+          pet_id, 
           weight: parseFloat(weight), 
           date: currentDate 
         },
-      ]);
+);
 
-      if (error) {
-        console.log(error);
-        return;
-      }
-      else {
-        fetchWeightHistory()
-      }
-
+      fetchWeightHistory && fetchWeightHistory()
       setWeight('');
+    
     } catch (error) {
       console.log(error);
     }
@@ -54,5 +46,18 @@ const AddWeight = ({ pet, fetchWeightHistory }) => {
   );
 };
 
-export default AddWeight;
+const ConnectedAddWeight = ({ pet, fetchWeightHistory }) => {
+    
 
+    const addWeight = async (weight) => {
+      const { error } = await supabase.from('weight_history').insert([weight]);
+
+      if (error) {
+        throw new Error(error.message)
+      }
+    }
+
+    return <AddWeight pet_id={pet.id} fetchWeightHistory={fetchWeightHistory} addWeight={addWeight} />
+}
+
+export default ConnectedAddWeight

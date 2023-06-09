@@ -4,8 +4,10 @@ import supabase from '../../config/supabaseClient';
 import EditIcon from '@mui/icons-material/Edit';
 import UpdateReminder from './UpdateReminder';
 import './Reminders.css'
+import { useAuth } from '../../context/AuthProvider';
 
 const Reminders = ({ pet }) => {
+  const { user } = useAuth()
   const [fetchError, setFetchError] = useState(null);
   const [reminderData, setReminderData] = useState([]);
   const [selectedReminder, setSelectedReminder] = useState(null);

@@ -5,7 +5,6 @@ import AddWeight from './AddWeight';
 
 import './WeightHistory.css'
 
-
 const WeightHistory = ({ pet, onWeightAdded }) => {
   const [fetchError, setFetchError] = useState(null);
   const [weightData, setWeightData] = useState([]);
@@ -66,7 +65,7 @@ const WeightHistory = ({ pet, onWeightAdded }) => {
         {showAddWeightForm ? 'Hide Form' : 'Add Weight'}
       </button>
       <h3 className="weight-history-title">Weight History</h3>
-      {showAddWeightForm && <AddWeight pet={pet} onWeightAdded={handleWeightAdded} />}
+      {showAddWeightForm && <AddWeight pet={pet} fetchWeightHistory={fetchWeightHistory} />}
       {fetchError && <p>Error: {fetchError}</p>}
       {weightData.length > 0 ? (
         <table>
