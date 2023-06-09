@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import supabase from "../config/supabaseClient";
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWeightScale } from '@fortawesome/free-solid-svg-icons';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+// import EditIcon from '@material-ui/icons/Edit';
+// import DeleteIcon from '@material-ui/icons/Delete';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faWeightScale } from '@fortawesome/free-solid-svg-icons';
 
 import "./PetCard.css"
 import Weight from "./Weight/PetWeight";
@@ -16,15 +18,15 @@ const PetCard = ({ pet, onDelete }) => {
         const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365))
         return ageInYears
     };
-    
+
     const age = calculateAge(pet.dob)
 
     const getSexIcon = (sex) => {
         if (sex === 'male') {
-          return '♂︎'
+            return '♂︎'
         }
         if (sex === 'female') {
-          return '♀︎'
+            return '♀︎'
         }
         return null
     }
@@ -35,14 +37,14 @@ const PetCard = ({ pet, onDelete }) => {
         const month = date.toLocaleDateString(undefined, { month: 'short' });
         return `${day}-${month}`;
     }
-    
+
     const handleDelete = async () => {
         const { error } = await supabase
             .from('pets')
             .delete()
             .eq('id', pet.id)
 
-        if(error){
+        if (error) {
             console.log(error)
             return
         }
@@ -60,18 +62,18 @@ const PetCard = ({ pet, onDelete }) => {
             <p><strong>Birthday:</strong> {formatDate(pet.dob)}</p>
             <p><strong>Dessexed:</strong> {pet.desexed ? 'Yes' : 'No'}</p>
             <Weight 
-            key={pet.id} 
-            pet={pet}
+                key={pet.id} 
+                pet={pet}
             />
             <br />
             <div >
-            <Link to={`/${pet.id}`} className="info-link">
-                {pet.name}'s full profile
-            </Link>
+                <Link to={`/${pet.id}`} className="info-link">
+                    {pet.name}'s full profile
+                </Link>
             </div>
-      
+
             <div className="buttons">
-               
+                
                 <Link to={'/update/' + pet.id}>
                     <EditIcon />
                 </Link>

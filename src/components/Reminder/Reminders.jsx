@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import supabase from '../../config/supabaseClient';
-import EditIcon from '@material-ui/icons/Edit';
+// import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import UpdateReminder from './UpdateReminder';
 import './Reminders.css'
 
@@ -20,7 +21,7 @@ const Reminders = ({ pet }) => {
         .limit(6);
 
       if (pet) {
-          query = query.eq('pet_id', pet.id);
+        query = query.eq('pet_id', pet.id);
       }
 
       const { data, error } = await query;
@@ -43,7 +44,6 @@ const Reminders = ({ pet }) => {
 
 
   useEffect(() => {
-    
     fetchReminders();
   }, []);
 
@@ -83,7 +83,7 @@ const Reminders = ({ pet }) => {
                 <td>{formatDate(reminder.due_date)}</td>
                 <td>{reminder.task}</td>
                 <td>
-                <EditIcon onClick={() => handleEditReminder(reminder)} />
+                  <EditIcon onClick={() => handleEditReminder(reminder)} />
                 </td>
               </tr>
             ))}
