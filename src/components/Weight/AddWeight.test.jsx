@@ -15,7 +15,7 @@ it('should render the AddWeight component', async () => {
 
     await userEvent.type(weightInput, '17.5');
 
-    expect(weightInput).toHaveValue('17.5');
+    expect(weightInput).toHaveValue(17.5);
 
     await userEvent.click(screen.getByText('Add Weight'));
 
@@ -25,8 +25,6 @@ it('should render the AddWeight component', async () => {
         date: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/),
     });
     expect(fetchWeightHistory).toHaveBeenCalled();
-
-    // Clear components
    
-    expect(weightInput).toHaveValue('');
+    expect(weightInput).toHaveValue(null);
 })

@@ -21,6 +21,7 @@ const PetProfile = () => {
 
     const [selectedReminder, setSelectedReminder] = useState(null);
 
+
     const handleEditReminder = (reminder) => {
         setSelectedReminder(reminder);
     };
@@ -82,6 +83,8 @@ const PetProfile = () => {
         setShowAddReminderForm(!showAddReminderForm);
       };
 
+
+
     return (
      <div className="pet-profile">
       {fetchError && <p>{fetchError}</p>}
@@ -126,8 +129,8 @@ const PetProfile = () => {
             <button className="add-reminder-toggle" onClick={toggleAddReminderForm}>
               {showAddReminderForm ? 'Hide Form' : 'Add Reminder'}
             </button>
-            {showAddReminderForm && <AddReminder pet={pet} />}
-            <Reminders pet={pet} />
+            {/* {showAddReminderForm && <AddReminder pet={pet}/>} */}
+            <Reminders pet={pet} showAddReminderForm={showAddReminderForm} />
           </div>
         </div>
       )}

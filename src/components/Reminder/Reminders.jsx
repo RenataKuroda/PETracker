@@ -5,13 +5,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import UpdateReminder from './UpdateReminder';
 import './Reminders.css'
 import { useAuth } from '../../context/AuthProvider';
+import AddReminder  from './AddReminder';
 
-const Reminders = ({ pet }) => {
+const Reminders = ({ pet, showAddReminderForm }) => {
   const { user } = useAuth()
   const [fetchError, setFetchError] = useState(null);
-  const [reminderData, setReminderData] = useState([]);
   const [selectedReminder, setSelectedReminder] = useState(null);
-
+  const [reminderData, setReminderData] = useState([]);
+  
 
   const fetchReminders = async () => {
     try {
@@ -19,6 +20,7 @@ const Reminders = ({ pet }) => {
         .from('reminders')
         .select('id, due_date, pet_id, task')
         .eq('completed', false)
+        .eq('user_id', user.id)
         .order('due_date', { ascending: true })
         .limit(6);
 
@@ -27,13 +29,14 @@ const Reminders = ({ pet }) => {
       }
 
       const { data, error } = await query;
-
+      console.log(data)
       if (error) {
         setFetchError('Could not fetch reminders');
         console.log(error);
         setReminderData([]);
       }
       if (data) {
+        
         setReminderData(data);
         setFetchError(null);
       }
@@ -43,7 +46,6 @@ const Reminders = ({ pet }) => {
       setReminderData([]);
     }
   };
-
 
   useEffect(() => {
     fetchReminders();
@@ -57,6 +59,10 @@ const Reminders = ({ pet }) => {
         setSelectedReminder(null);
     };
 
+    const handleReminderUpdate = () => {
+      setIsReminderUpdated(!isReminderUpdated);
+    };
+
     const formatDate = (dateString) => {
       const date = new Date(dateString);
       const day = date.toLocaleDateString(undefined, { day: '2-digit' });
@@ -67,6 +73,7 @@ const Reminders = ({ pet }) => {
 
     return (
         <div className='reminders-container'>
+        {showAddReminderForm && <AddReminder pet={pet} fetchReminders={fetchReminders}/>}
         <h3 className="reminders-title">Reminders</h3>
         {fetchError && <p>Error: {fetchError}</p>}
         {reminderData.length > 0 ? (

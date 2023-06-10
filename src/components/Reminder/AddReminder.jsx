@@ -7,6 +7,7 @@ import './AddReminder.css'
 export const AddReminder = ({ pet_id, user_id, fetchReminders, addReminder }) => {
     const [dueDate, setDueDate] = useState('');
     const [task, setTask] = useState('');
+    console.log(addReminder)
 
     const handleDueDateChange = (e) => {
         setDueDate(e.target.value);
@@ -57,9 +58,12 @@ export const AddReminder = ({ pet_id, user_id, fetchReminders, addReminder }) =>
 const ConnectedAddReminder = ({ pet, fetchReminders }) => {
     const { user } = useAuth()
 
+    console.log(pet,  'pet')
+    console.log(user)
+
     const addReminder = async (reminder) => {
         const { error } = await supabase.from('reminders').insert([reminder]);
-
+        console.log(reminder)
         if (error) {
             throw new Error(error.message);
         }
