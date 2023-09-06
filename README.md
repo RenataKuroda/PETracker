@@ -5,6 +5,8 @@ Tech stack: React and Supabase.
 
 Final Project submission for [General Assembly](https://generalassemb.ly) Software Engineering Course (end of Unit 4). 
 
+To check my project's demo go to this [link](https://majestic-parfait-d3caa8.netlify.app/login).
+
 ![PETracker](./src/assets/images/PETracker-homepage.jpg) 
 
 ### **The technical requirements for this project were:**
@@ -51,7 +53,7 @@ Users can navigate through their pet's full profile where they will be able to s
 - Vet Visits 
 - Weight History
 
-6. Deploy online (pending)
+6. Deploy online wih Netlify.
 
 
 #### **Technologies used**
