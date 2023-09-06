@@ -5,7 +5,7 @@ Tech stack: React and Supabase.
 
 Final Project submission for [General Assembly](https://generalassemb.ly) Software Engineering Course (end of Unit 4). 
 
-To check my project's demo go to this [link](https://majestic-parfait-d3caa8.netlify.app/login).
+To check my project's demo go to this [link](https://majestic-parfait-d3caa8.netlify.app).
 
 ![PETracker](./src/assets/images/PETracker-homepage.jpg) 
 
